@@ -9,12 +9,8 @@ public abstract class AbstractService<T, R extends AbstractRepository<T>> {
 
     Logger log = Logger.getLogger(this.getClass());
 
-    private R r;
-
     @Autowired
-    public AbstractService(R r) {
-        this.r = r;
-    }
+    private R r;
 
     public T getById(Long id) {
 

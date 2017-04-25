@@ -14,18 +14,14 @@ import pyt.repository.TaskRepository;
 @Service
 public class ProjectService extends AbstractService<Project, ProjectRepository> {
 
-    private ProjectRepository projectRepository;
-    private CommentRepository commentRepository;
-    private TaskRepository taskRepository;
-    private CategoryRepository categoryRepository;
-
     @Autowired
-    public ProjectService(ProjectRepository projectRepository, CommentRepository commentRepository, TaskRepository taskRepository, CategoryRepository categoryRepository) {
-        super(projectRepository);
-        this.commentRepository = commentRepository;
-        this.taskRepository = taskRepository;
-        this.categoryRepository = categoryRepository;
-    }
+    private ProjectRepository projectRepository;
+    @Autowired
+    private CommentRepository commentRepository;
+    @Autowired
+    private TaskRepository taskRepository;
+    @Autowired
+    private CategoryRepository categoryRepository;
 
     public Project addComment(Comment comment, Long id) {
 

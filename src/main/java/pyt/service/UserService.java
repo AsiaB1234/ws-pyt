@@ -13,16 +13,12 @@ import pyt.repository.UserRepository;
 public class UserService extends
         AbstractService<User, UserRepository> {
 
-    private UserRepository userRepository;
-    private TaskRepository taskRepository;
-    private ProjectRepository projectRepository;
-
     @Autowired
-    public UserService(UserRepository userRepository, TaskRepository taskRepository, ProjectRepository projectRepository) {
-        super(userRepository);
-        this.taskRepository = taskRepository;
-        this.projectRepository = projectRepository;
-    }
+    private UserRepository userRepository;
+    @Autowired
+    private TaskRepository taskRepository;
+    @Autowired
+    private ProjectRepository projectRepository;
 
     public User addTask(Long id, Task task) {
 

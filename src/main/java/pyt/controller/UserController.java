@@ -1,5 +1,6 @@
 package pyt.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,11 +17,8 @@ import pyt.service.UserService;
 @RequestMapping("/user")
 public class UserController extends AbstractController<User, UserService> {
 
+    @Autowired
     private UserService userService;
-
-    public UserController(UserService userService) {
-        super(userService);
-    }
 
     @RequestMapping(value = "/{id}/tasks", method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE,

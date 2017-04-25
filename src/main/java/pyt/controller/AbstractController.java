@@ -15,13 +15,8 @@ public abstract class AbstractController<T, S extends AbstractService> {
 
     Logger log = Logger.getLogger(this.getClass());
 
-    private S s;
-
     @Autowired
-
-    public AbstractController(S s) {
-        this.s = s;
-    }
+    private S s;
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
