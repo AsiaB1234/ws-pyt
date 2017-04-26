@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -24,7 +25,7 @@ public class UserController extends AbstractController<User, UserService> {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(value = HttpStatus.CREATED)
-    public User addTask(@PathVariable Long id, Task task) {
+    public User addTask(@PathVariable Long id, @RequestBody Task task) {
 
         log.info("addTask");
 
@@ -35,7 +36,7 @@ public class UserController extends AbstractController<User, UserService> {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(value = HttpStatus.CREATED)
-    public User addProject(@PathVariable Long id, Project project) {
+    public User addProject(@PathVariable Long id, @RequestBody Project project) {
 
         log.info("addProject");
 

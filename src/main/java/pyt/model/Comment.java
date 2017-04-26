@@ -1,5 +1,6 @@
 package pyt.model;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -9,7 +10,7 @@ import org.neo4j.ogm.annotation.Relationship;
 import org.neo4j.ogm.annotation.typeconversion.DateLong;
 
 @NodeEntity
-public class Comment {
+public class Comment implements Serializable {
 
     @GraphId
     private Long id;

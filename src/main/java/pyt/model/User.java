@@ -1,5 +1,6 @@
 package pyt.model;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 import org.neo4j.ogm.annotation.GraphId;
@@ -7,7 +8,7 @@ import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
 
 @NodeEntity
-public class User {
+public class User implements Serializable {
 
     @GraphId
     private Long id;

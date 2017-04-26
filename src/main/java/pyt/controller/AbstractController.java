@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -16,7 +17,7 @@ public abstract class AbstractController<T, S extends AbstractService> {
     Logger log = Logger.getLogger(this.getClass());
 
     @Autowired
-    private S s;
+    protected S s;
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
@@ -36,7 +37,7 @@ public abstract class AbstractController<T, S extends AbstractService> {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(value = HttpStatus.CREATED)
-    public T save(T t) {
+    public T save(@RequestBody T t) {
         log.info("save");
         return (T) s.save(t);
     }

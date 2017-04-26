@@ -16,18 +16,18 @@ public class Project implements Serializable {
     @Relationship(type = "PROJECT_COMMENT")
     private List<Comment> comments = new LinkedList<>();
     @Relationship(type = "PROJECT_CATEGORY")
-    private List<Category> categorys = new LinkedList<>();
+    private List<Category> categories = new LinkedList<>();
     @Relationship(type = "PROJECT_TASK")
     private List<Task> tasks = new LinkedList<>();
 
     public Project() {
     }
 
-    public Project(Long id, String name, List<Comment> comments, List<Category> categorys, List<Task> tasks) {
+    public Project(Long id, String name, List<Comment> comments, List<Category> categories, List<Task> tasks) {
         this.id = id;
         this.name = name;
         this.comments = comments;
-        this.categorys = categorys;
+        this.categories = categories;
         this.tasks = tasks;
     }
 
@@ -43,8 +43,8 @@ public class Project implements Serializable {
         return comments;
     }
 
-    public List<Category> getCategorys() {
-        return categorys;
+    public List<Category> getCategories() {
+        return categories;
     }
 
     public List<Task> getTasks() {
@@ -56,7 +56,7 @@ public class Project implements Serializable {
     }
 
     public void addCategory(Category category) {
-        categorys.add(category);
+        categories.add(category);
     }
 
     public void addTask(Task task) {

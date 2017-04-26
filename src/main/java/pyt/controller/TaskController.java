@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -24,7 +25,7 @@ public class TaskController extends AbstractController<Task, TaskService> {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(value = HttpStatus.CREATED)
-    public Task addComment(@PathVariable Long id, Comment comment) {
+    public Task addComment(@PathVariable Long id, @RequestBody Comment comment) {
 
         log.info("addComment");
 
@@ -35,7 +36,7 @@ public class TaskController extends AbstractController<Task, TaskService> {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(value = HttpStatus.CREATED)
-    public Task addCategory(@PathVariable Long id, Category category) {
+    public Task addCategory(@PathVariable Long id, @RequestBody Category category) {
 
         log.info("addCategory");
 
