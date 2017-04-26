@@ -12,25 +12,25 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import pyt.service.AbstractService;
 
-public abstract class AbstractController<T, S extends AbstractService> {
+public abstract class AbstractController<T, Service extends AbstractService> {
 
     Logger log = Logger.getLogger(this.getClass());
 
     @Autowired
-    protected S s;
+    protected Service service;
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public T getById(@PathVariable Long id) {
         log.info("getById");
-        return (T) s.getById(id);
+        return (T) service.getById(id);
     }
 
     @RequestMapping(method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public List<T> get() {
         log.info("get");
-        return s.get();
+        return service.get();
     }
 
     @RequestMapping(method = RequestMethod.POST,
@@ -39,6 +39,6 @@ public abstract class AbstractController<T, S extends AbstractService> {
     @ResponseStatus(value = HttpStatus.CREATED)
     public T save(@RequestBody T t) {
         log.info("save");
-        return (T) s.save(t);
+        return (T) service.save(t);
     }
 }

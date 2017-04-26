@@ -1,6 +1,5 @@
 package pyt.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,9 +17,6 @@ import pyt.service.TaskService;
 @RequestMapping("/task")
 public class TaskController extends AbstractController<Task, TaskService> {
 
-    @Autowired
-    private TaskService taskService;
-
     @RequestMapping(value = "/{id}/comments", method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
@@ -29,7 +25,7 @@ public class TaskController extends AbstractController<Task, TaskService> {
 
         log.info("addComment");
 
-        return taskService.addComment(comment, id);
+        return service.addComment(comment, id);
     }
 
     @RequestMapping(value = "/{id}/categorys", method = RequestMethod.POST,
@@ -40,7 +36,7 @@ public class TaskController extends AbstractController<Task, TaskService> {
 
         log.info("addCategory");
 
-        return taskService.addCategory(category, id);
+        return service.addCategory(category, id);
     }
 
 }

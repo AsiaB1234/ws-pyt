@@ -1,6 +1,5 @@
 package pyt.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,9 +17,6 @@ import pyt.service.UserService;
 @RequestMapping("/user")
 public class UserController extends AbstractController<User, UserService> {
 
-    @Autowired
-    private UserService userService;
-
     @RequestMapping(value = "/{id}/tasks", method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
@@ -29,7 +25,7 @@ public class UserController extends AbstractController<User, UserService> {
 
         log.info("addTask");
 
-        return userService.addTask(id, task);
+        return service.addTask(id, task);
     }
 
     @RequestMapping(value = "/{id}/projects", method = RequestMethod.POST,
@@ -40,6 +36,6 @@ public class UserController extends AbstractController<User, UserService> {
 
         log.info("addProject");
 
-        return userService.addProject(id, project);
+        return service.addProject(id, project);
     }
 }
