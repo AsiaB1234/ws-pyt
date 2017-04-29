@@ -17,19 +17,20 @@ public class Comment implements Serializable {
     private String content;
     @DateLong
     private Date addedDate;
-    @Relationship(type = "SENDER")
-    private User owner;
+    private Long ownerId;
+    private String ownerName;
     @Relationship(type = "RESPONSE_COMMENT")
     private List<Comment> response = new LinkedList<>();
 
     public Comment() {
     }
 
-    public Comment(Long id, String content, Date addedDate, User owner, List<Comment> response) {
+    public Comment(Long id, String content, Date addedDate, Long ownerId, String ownerName, List<Comment> response) {
         this.id = id;
         this.content = content;
         this.addedDate = addedDate;
-        this.owner = owner;
+        this.ownerId = ownerId;
+        this.ownerName = ownerName;
         this.response = response;
         if (addedDate == null && id == null) {
             addedDate = new Date();
@@ -48,16 +49,16 @@ public class Comment implements Serializable {
         return addedDate;
     }
 
-    public User getOwner() {
-        return owner;
+    public Long getOwnerId() {
+        return ownerId;
+    }
+
+    public String getOwnerName() {
+        return ownerName;
     }
 
     public List<Comment> getResponse() {
         return response;
-    }
-
-    public void setOwner(User owner) {
-        this.owner = owner;
     }
 
     public void addResponse(Comment comment) {

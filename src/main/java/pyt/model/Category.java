@@ -10,15 +10,15 @@ public class Category implements Serializable {
     @GraphId
     private Long id;
     private String name;
-    private String icon;
+    private String color;
 
     public Category() {
     }
 
-    public Category(Long id, String name, String icon) {
+    public Category(Long id, String name, String color) {
         this.id = id;
         this.name = name;
-        this.icon = icon;
+        this.color = color;
     }
 
     public Long getId() {
@@ -29,8 +29,8 @@ public class Category implements Serializable {
         return name;
     }
 
-    public String getIcon() {
-        return icon;
+    public String getColor() {
+        return color;
     }
 
 }
