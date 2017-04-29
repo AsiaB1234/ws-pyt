@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import pyt.model.Category;
 import pyt.model.Comment;
 import pyt.model.Task;
 import pyt.service.TaskService;
@@ -28,15 +27,15 @@ public class TaskController extends AbstractController<Task, TaskService> {
         return service.addComment(comment, id);
     }
 
-    @RequestMapping(value = "/{id}/categorys", method = RequestMethod.POST,
+    @RequestMapping(value = "/{id}/categories/{categoryId}", method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(value = HttpStatus.CREATED)
-    public Task addCategory(@PathVariable Long id, @RequestBody Category category) {
+    public Task addCategory(@PathVariable Long id, @PathVariable Long categoryId) {
 
         log.info("addCategory");
 
-        return service.addCategory(category, id);
+        return service.addCategory(id, categoryId);
     }
 
 }

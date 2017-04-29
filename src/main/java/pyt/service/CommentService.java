@@ -14,7 +14,7 @@ public class CommentService extends
 
         Comment parent = repository.findOne(id);
         parent.addResponse(comment);
-        return repository.save(parent);
+        return repository.save(parent, 1);
     }
 
 }

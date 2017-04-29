@@ -16,7 +16,7 @@ public class UserService extends
 
         User user = repository.findOne(id);
         user.addTask(task);
-        return repository.save(user);
+        return repository.save(user, 1);
     }
 
     public User addProject(Long id, Project project) {
@@ -25,7 +25,7 @@ public class UserService extends
 
         User user = repository.findOne(id);
         user.addProject(project);
-        return repository.save(user);
+        return repository.save(user, 1);
     }
 
 }

@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import pyt.model.Category;
 import pyt.model.Comment;
 import pyt.model.Project;
 import pyt.model.Task;
@@ -26,15 +25,15 @@ public class ProjectController extends AbstractController<Project, ProjectServic
         return service.addComment(comment, id);
     }
 
-    @RequestMapping(value = "/{id}/categorys", method = RequestMethod.POST,
+    @RequestMapping(value = "/{id}/categorys/categoryId", method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(value = HttpStatus.CREATED)
-    public Project addCategory(@PathVariable Long id, @RequestBody Category category) {
+    public Project addCategory(@PathVariable Long id, @PathVariable Long categoryId) {
 
         log.info("addCategory");
 
-        return service.addCategory(category, id);
+        return service.addCategory(id, categoryId);
     }
 
     @RequestMapping(value = "/{id}/tasks", method = RequestMethod.POST,

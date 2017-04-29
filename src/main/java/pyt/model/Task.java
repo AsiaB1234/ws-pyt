@@ -1,13 +1,13 @@
 package pyt.model;
 
 import java.io.Serializable;
-import java.sql.Time;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import org.neo4j.ogm.annotation.GraphId;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
+import org.neo4j.ogm.annotation.typeconversion.DateLong;
 
 @NodeEntity
 public class Task implements Serializable {
@@ -16,24 +16,23 @@ public class Task implements Serializable {
     private Long id;
     private String name;
     private Integer priority;
+    @DateLong
     private Date endDate;
-    private Time endTime;
     private Boolean isImportant;
     private Boolean isDone;
-    @Relationship(type = "TASK_COMMENTS")
+    @Relationship(type = "TASK_COMMENT")
     private List<Comment> comments = new LinkedList<>();
-    @Relationship(type = "TASK_CATEGORYS")
+    @Relationship(type = "TASK_CATEGORY")
     private List<Category> categories = new LinkedList<>();
 
     public Task() {
     }
 
-    public Task(Long id, String name, Integer priority, Date endDate, Time endTime, Boolean isImportant, Boolean isDone, List<Comment> comments, List<Category> categories) {
+    public Task(Long id, String name, Integer priority, Date endDate, Boolean isImportant, Boolean isDone, List<Comment> comments, List<Category> categories) {
         this.id = id;
         this.name = name;
         this.priority = priority;
         this.endDate = endDate;
-        this.endTime = endTime;
         this.isImportant = isImportant;
         this.isDone = isDone;
         this.comments = comments;
@@ -54,10 +53,6 @@ public class Task implements Serializable {
 
     public Date getEndDate() {
         return endDate;
-    }
-
-    public Time getEndTime() {
-        return endTime;
     }
 
     public Boolean getIsImportant() {

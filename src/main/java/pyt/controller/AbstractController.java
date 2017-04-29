@@ -1,7 +1,8 @@
 package pyt.controller;
 
 import java.util.List;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -14,7 +15,7 @@ import pyt.service.AbstractService;
 
 public abstract class AbstractController<T, Service extends AbstractService> {
 
-    Logger log = Logger.getLogger(this.getClass());
+    Logger log = LoggerFactory.getLogger(getClass());
 
     @Autowired
     protected Service service;
@@ -40,5 +41,14 @@ public abstract class AbstractController<T, Service extends AbstractService> {
     public T save(@RequestBody T t) {
         log.info("save");
         return (T) service.save(t);
+    }
+
+    @RequestMapping(method = RequestMethod.PUT,
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
+    public T update(@RequestBody T t) {
+        log.info("update");
+        return (T) service.update(t);
     }
 }

@@ -1,13 +1,14 @@
 package pyt.service;
 
 import java.util.List;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import pyt.repository.AbstractRepository;
 
 public abstract class AbstractService<T, Repository extends AbstractRepository<T>> {
 
-    Logger log = Logger.getLogger(this.getClass());
+    Logger log = LoggerFactory.getLogger(getClass());
 
     @Autowired
     protected Repository repository;
@@ -30,7 +31,14 @@ public abstract class AbstractService<T, Repository extends AbstractRepository<T
 
         log.info("save");
 
-        return repository.save(t);
+        return repository.save(t, 1);
+    }
+
+    public T update(T t) {
+
+        log.info("update");
+
+        return repository.save(t, 0);
     }
 
 }
