@@ -13,6 +13,9 @@ public class CommentService extends
         log.info("addResponse");
 
         Comment parent = repository.findOne(id);
+        if (parent == null) {
+            throw new PytServiceException("Comment with given id doesn't exist.");
+        }
         parent.addResponse(comment);
         return repository.save(parent, 1);
     }

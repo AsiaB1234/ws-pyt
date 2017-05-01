@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import pyt.model.Category;
 import pyt.model.Project;
 import pyt.model.Task;
 import pyt.model.User;
@@ -62,5 +63,16 @@ public class UserController {
         log.info("addProject");
 
         return userService.addProject(id, project);
+    }
+
+    @RequestMapping(value = "/{id}/categories", method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(value = HttpStatus.CREATED)
+    public User addCategory(@PathVariable Long id, @RequestBody Category category) {
+
+        log.info("addProject");
+
+        return userService.addCategory(id, category);
     }
 }

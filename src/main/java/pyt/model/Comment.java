@@ -20,7 +20,7 @@ public class Comment implements Serializable {
     private Long ownerId;
     private String ownerName;
     @Relationship(type = "RESPONSE_COMMENT")
-    private List<Comment> response = new LinkedList<>();
+    private List<Comment> response;
 
     public Comment() {
     }
@@ -32,6 +32,9 @@ public class Comment implements Serializable {
         this.ownerId = ownerId;
         this.ownerName = ownerName;
         this.response = response;
+        if (response.isEmpty()) {
+            response = null;
+        }
         if (addedDate == null && id == null) {
             addedDate = new Date();
         }
@@ -62,6 +65,9 @@ public class Comment implements Serializable {
     }
 
     public void addResponse(Comment comment) {
+        if (response == null || response.isEmpty()) {
+            response = new LinkedList<>();
+        }
         response.add(comment);
     }
 

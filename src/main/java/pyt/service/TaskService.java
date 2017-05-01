@@ -18,9 +18,12 @@ public class TaskService extends
 
         log.info("addComment");
 
-        Task parent = repository.findOne(id);
-        parent.addComment(comment);
-        return repository.save(parent, 1);
+        Task task = repository.findOne(id);
+        if (task == null) {
+            throw new PytServiceException("Task with given id doesn't exist.");
+        }
+        task.addComment(comment);
+        return repository.save(task, 1);
     }
 
     public Task addCategory(Long id, Long categoryId) {
@@ -28,10 +31,16 @@ public class TaskService extends
         log.info("addCategory");
 
         Category category = categoryService.getById(categoryId);
+        if (category == null) {
+            throw new PytServiceException("Category with given id doesn't exist.");
+        }
 
-        Task parent = repository.findOne(id);
-        parent.addCategory(category);
-        return repository.save(parent, 0);
+        Task task = repository.findOne(id);
+        if (task == null) {
+            throw new PytServiceException("Task with given id doesn't exist.");
+        }
+        task.addCategory(category);
+        return repository.save(task, 0);
     }
 
 }

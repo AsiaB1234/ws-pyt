@@ -17,7 +17,7 @@ public abstract class AbstractService<T, Repository extends AbstractRepository<T
 
         log.info("getById");
 
-        return repository.findOne(id);
+        return repository.findOne(id, -1);
     }
 
     public List<T> get() {
@@ -31,7 +31,7 @@ public abstract class AbstractService<T, Repository extends AbstractRepository<T
 
         log.info("save");
 
-        return repository.save(t, 1);
+        return repository.save(t, 0);
     }
 
     public T update(T t) {

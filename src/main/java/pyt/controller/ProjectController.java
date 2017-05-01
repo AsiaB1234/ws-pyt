@@ -7,11 +7,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 import pyt.model.Comment;
 import pyt.model.Project;
 import pyt.model.Task;
 import pyt.service.ProjectService;
 
+@RestController
+@RequestMapping("/project")
 public class ProjectController extends AbstractController<Project, ProjectService> {
 
     @RequestMapping(value = "/{id}/comments", method = RequestMethod.POST,
@@ -25,7 +28,7 @@ public class ProjectController extends AbstractController<Project, ProjectServic
         return service.addComment(comment, id);
     }
 
-    @RequestMapping(value = "/{id}/categorys/categoryId", method = RequestMethod.POST,
+    @RequestMapping(value = "/{id}/categories/{categoryId}", method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(value = HttpStatus.CREATED)

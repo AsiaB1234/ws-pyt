@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pyt.model.Category;
 import pyt.model.Project;
 import pyt.model.Task;
 import pyt.model.User;
@@ -37,6 +38,9 @@ public class UserService {
         log.info("addTask");
 
         User user = userRepository.findOne(id);
+        if (user == null) {
+            throw new PytServiceException("User with given id doesn't exist.");
+        }
         user.addTask(task);
         return userRepository.save(user, 1);
     }
@@ -46,7 +50,22 @@ public class UserService {
         log.info("addProject");
 
         User user = userRepository.findOne(id);
+        if (user == null) {
+            throw new PytServiceException("User with given id doesn't exist.");
+        }
         user.addProject(project);
+        return userRepository.save(user, 1);
+    }
+
+    public User addCategory(Long id, Category category) {
+
+        log.info("addCategory");
+
+        User user = userRepository.findOne(id);
+        if (user == null) {
+            throw new PytServiceException("User with given id doesn't exist.");
+        }
+        user.addCategory(category);
         return userRepository.save(user, 1);
     }
 

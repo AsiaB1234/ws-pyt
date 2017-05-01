@@ -19,6 +19,9 @@ public class ProjectService extends AbstractService<Project, ProjectRepository> 
         log.info("addComment");
 
         Project project = repository.findOne(id);
+        if (project == null) {
+            throw new PytServiceException("Project with given id doesn't exist.");
+        }
         project.addComment(comment);
         return repository.save(project, 1);
     }
@@ -28,8 +31,14 @@ public class ProjectService extends AbstractService<Project, ProjectRepository> 
         log.info("addCategory");
 
         Category category = categoryService.getById(categoryId);
+        if (category == null) {
+            throw new PytServiceException("Category with given id doesn't exist.");
+        }
 
         Project project = repository.findOne(id);
+        if (project == null) {
+            throw new PytServiceException("Project with given id doesn't exist.");
+        }
         project.addCategory(category);
         return repository.save(project, 1);
     }
@@ -39,6 +48,9 @@ public class ProjectService extends AbstractService<Project, ProjectRepository> 
         log.info("addTask");
 
         Project project = repository.findOne(id);
+        if (project == null) {
+            throw new PytServiceException("Project with given id doesn't exist.");
+        }
         project.addTask(task);
         return repository.save(project, 1);
     }
