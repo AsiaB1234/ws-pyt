@@ -23,12 +23,12 @@ public class Task implements Serializable {
     @Relationship(type = "TASK_COMMENT")
     private List<Comment> comments = new LinkedList<>();
     @Relationship(type = "TASK_CATEGORY")
-    private List<Category> categories = new LinkedList<>();
+    private Category category;
 
     public Task() {
     }
 
-    public Task(Long id, String name, Integer priority, Date endDate, Boolean isImportant, Boolean isDone, List<Comment> comments, List<Category> categories) {
+    public Task(Long id, String name, Integer priority, Date endDate, Boolean isImportant, Boolean isDone, List<Comment> comments, Category category) {
         this.id = id;
         this.name = name;
         this.priority = priority;
@@ -36,7 +36,7 @@ public class Task implements Serializable {
         this.isImportant = isImportant;
         this.isDone = isDone;
         this.comments = comments;
-        this.categories = categories;
+        this.category = category;
     }
 
     public Long getId() {
@@ -67,16 +67,16 @@ public class Task implements Serializable {
         return comments;
     }
 
-    public List<Category> getCategories() {
-        return categories;
+    public Category getCategory() {
+        return category;
     }
 
     public void addComment(Comment comment) {
         comments.add(comment);
     }
 
-    public void addCategory(Category category) {
-        categories.add(category);
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
 }

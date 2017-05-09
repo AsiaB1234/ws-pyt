@@ -26,9 +26,9 @@ public class ProjectService extends AbstractService<Project, ProjectRepository> 
         return repository.save(project, 1);
     }
 
-    public Project addCategory(Long id, Long categoryId) {
+    public Project setCategory(Long id, Long categoryId) {
 
-        log.info("addCategory");
+        log.info("setCategory");
 
         Category category = categoryService.getById(categoryId);
         if (category == null) {
@@ -39,7 +39,7 @@ public class ProjectService extends AbstractService<Project, ProjectRepository> 
         if (project == null) {
             throw new PytServiceException("Project with given id doesn't exist.");
         }
-        project.addCategory(category);
+        project.setCategory(category);
         return repository.save(project, 1);
     }
 

@@ -26,9 +26,9 @@ public class TaskService extends
         return repository.save(task, 1);
     }
 
-    public Task addCategory(Long id, Long categoryId) {
+    public Task setCategory(Long id, Long categoryId) {
 
-        log.info("addCategory");
+        log.info("setCategory");
 
         Category category = categoryService.getById(categoryId);
         if (category == null) {
@@ -39,7 +39,7 @@ public class TaskService extends
         if (task == null) {
             throw new PytServiceException("Task with given id doesn't exist.");
         }
-        task.addCategory(category);
+        task.setCategory(category);
         return repository.save(task, 0);
     }
 

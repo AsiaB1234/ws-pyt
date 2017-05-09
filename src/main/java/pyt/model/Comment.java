@@ -2,11 +2,8 @@ package pyt.model;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
 import org.neo4j.ogm.annotation.GraphId;
 import org.neo4j.ogm.annotation.NodeEntity;
-import org.neo4j.ogm.annotation.Relationship;
 import org.neo4j.ogm.annotation.typeconversion.DateLong;
 
 @NodeEntity
@@ -19,22 +16,16 @@ public class Comment implements Serializable {
     private Date addedDate;
     private Long ownerId;
     private String ownerName;
-    @Relationship(type = "RESPONSE_COMMENT")
-    private List<Comment> response;
 
     public Comment() {
     }
 
-    public Comment(Long id, String content, Date addedDate, Long ownerId, String ownerName, List<Comment> response) {
+    public Comment(Long id, String content, Date addedDate, Long ownerId, String ownerName) {
         this.id = id;
         this.content = content;
         this.addedDate = addedDate;
         this.ownerId = ownerId;
         this.ownerName = ownerName;
-        this.response = response;
-        if (response.isEmpty()) {
-            response = null;
-        }
         if (addedDate == null && id == null) {
             addedDate = new Date();
         }
@@ -58,17 +49,6 @@ public class Comment implements Serializable {
 
     public String getOwnerName() {
         return ownerName;
-    }
-
-    public List<Comment> getResponse() {
-        return response;
-    }
-
-    public void addResponse(Comment comment) {
-        if (response == null || response.isEmpty()) {
-            response = new LinkedList<>();
-        }
-        response.add(comment);
     }
 
 }
