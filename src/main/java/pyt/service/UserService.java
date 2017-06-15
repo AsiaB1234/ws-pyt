@@ -23,7 +23,7 @@ public class UserService {
 
         log.info("getById");
 
-        return new UserView(userRepository.findOne(id));
+        return new UserView(userRepository.findOne(id, 3));
     }
 
     public User save(User user) {

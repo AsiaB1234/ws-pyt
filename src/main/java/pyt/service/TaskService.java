@@ -13,6 +13,11 @@ public class TaskService extends
 
     @Autowired
     CategoryService categoryService;
+//
+//    public List<Task> getTasksByUser(long id) {
+//        return null;
+////        return repository.getTasksByUser(id);
+//    }
 
     public Task addComment(Comment comment, Long id) {
 
@@ -40,7 +45,7 @@ public class TaskService extends
             throw new PytServiceException("Task with given id doesn't exist.");
         }
         task.setCategory(category);
-        return repository.save(task, 0);
+        return repository.save(task, 1);
     }
 
 }
