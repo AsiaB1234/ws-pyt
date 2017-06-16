@@ -2,8 +2,6 @@ package pyt.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pyt.model.Category;
-import pyt.model.Comment;
 import pyt.model.Project;
 import pyt.model.Task;
 import pyt.repository.ProjectRepository;
@@ -14,36 +12,7 @@ public class ProjectService extends AbstractService<Project, ProjectRepository> 
     @Autowired
     CategoryService categoryService;
 
-    public Project addComment(Comment comment, Long id) {
-
-        log.info("addComment");
-
-        Project project = repository.findOne(id);
-        if (project == null) {
-            throw new PytServiceException("Project with given id doesn't exist.");
-        }
-        project.addComment(comment);
-        return repository.save(project, 1);
-    }
-
-    public Project setCategory(Long id, Long categoryId) {
-
-        log.info("setCategory");
-
-        Category category = categoryService.getById(categoryId);
-        if (category == null) {
-            throw new PytServiceException("Category with given id doesn't exist.");
-        }
-
-        Project project = repository.findOne(id);
-        if (project == null) {
-            throw new PytServiceException("Project with given id doesn't exist.");
-        }
-        project.setCategory(category);
-        return repository.save(project, 1);
-    }
-
-    public Project addTask(Task task, Long id) {
+    public Task addTask(Task task, Long id) {
 
         log.info("addTask");
 
@@ -52,6 +21,7 @@ public class ProjectService extends AbstractService<Project, ProjectRepository> 
             throw new PytServiceException("Project with given id doesn't exist.");
         }
         project.addTask(task);
-        return repository.save(project, 1);
+        repository.save(project, 1);
+        return task;
     }
 }

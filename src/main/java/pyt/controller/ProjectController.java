@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import pyt.model.Comment;
 import pyt.model.Project;
 import pyt.model.Task;
 import pyt.service.ProjectService;
@@ -17,33 +16,11 @@ import pyt.service.ProjectService;
 @RequestMapping("/project")
 public class ProjectController extends AbstractController<Project, ProjectService> {
 
-    @RequestMapping(value = "/{id}/comments", method = RequestMethod.POST,
-            consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseStatus(value = HttpStatus.CREATED)
-    public Project addComment(@PathVariable Long id, @RequestBody Comment comment) {
-
-        log.info("addComment");
-
-        return service.addComment(comment, id);
-    }
-
-    @RequestMapping(value = "/{id}/category/{categoryId}", method = RequestMethod.POST,
-            consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseStatus(value = HttpStatus.CREATED)
-    public Project setCategory(@PathVariable Long id, @PathVariable Long categoryId) {
-
-        log.info("setCategory");
-
-        return service.setCategory(id, categoryId);
-    }
-
     @RequestMapping(value = "/{id}/tasks", method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(value = HttpStatus.CREATED)
-    public Project addTask(@PathVariable Long id, @RequestBody Task task) {
+    public Task addTask(@PathVariable Long id, @RequestBody Task task) {
 
         log.info("addTask");
 

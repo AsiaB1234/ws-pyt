@@ -33,7 +33,7 @@ public class UserService {
         return userRepository.save(user, 1);
     }
 
-    public User addTask(Long id, Task task) {
+    public Task addTask(Long id, Task task) {
 
         log.info("addTask");
 
@@ -42,10 +42,11 @@ public class UserService {
             throw new PytServiceException("User with given id doesn't exist.");
         }
         user.addTask(task);
-        return userRepository.save(user, 1);
+        userRepository.save(user, 1);
+        return task;
     }
 
-    public User addProject(Long id, Project project) {
+    public Project addProject(Long id, Project project) {
 
         log.info("addProject");
 
@@ -54,10 +55,11 @@ public class UserService {
             throw new PytServiceException("User with given id doesn't exist.");
         }
         user.addProject(project);
-        return userRepository.save(user, 1);
+        userRepository.save(user, 1);
+        return project;
     }
 
-    public User addCategory(Long id, Category category) {
+    public Category addCategory(Long id, Category category) {
 
         log.info("addCategory");
 
@@ -66,7 +68,8 @@ public class UserService {
             throw new PytServiceException("User with given id doesn't exist.");
         }
         user.addCategory(category);
-        return userRepository.save(user, 1);
+        userRepository.save(user, 1);
+        return category;
     }
 
 }

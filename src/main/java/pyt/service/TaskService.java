@@ -19,7 +19,7 @@ public class TaskService extends
 ////        return repository.getTasksByUser(id);
 //    }
 
-    public Task addComment(Comment comment, Long id) {
+    public Comment addComment(Comment comment, Long id) {
 
         log.info("addComment");
 
@@ -28,10 +28,11 @@ public class TaskService extends
             throw new PytServiceException("Task with given id doesn't exist.");
         }
         task.addComment(comment);
-        return repository.save(task, 1);
+        repository.save(task, 1);
+        return comment;
     }
 
-    public Task setCategory(Long id, Long categoryId) {
+    public Category setCategory(Long id, Long categoryId) {
 
         log.info("setCategory");
 
@@ -45,7 +46,8 @@ public class TaskService extends
             throw new PytServiceException("Task with given id doesn't exist.");
         }
         task.setCategory(category);
-        return repository.save(task, 1);
+        repository.save(task, 1);
+        return category;
     }
 
 }

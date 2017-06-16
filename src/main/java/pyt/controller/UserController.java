@@ -20,7 +20,6 @@ import pyt.service.UserService;
 import pyt.view.UserView;
 
 @RestController
-@CrossOrigin(origins = "*")
 @RequestMapping("/user")
 public class UserController {
 
@@ -50,7 +49,7 @@ public class UserController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(value = HttpStatus.CREATED)
-    public User addTask(@PathVariable Long id, @RequestBody Task task) {
+    public Task addTask(@PathVariable Long id, @RequestBody Task task) {
 
         log.info("addTask");
 
@@ -61,7 +60,7 @@ public class UserController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(value = HttpStatus.CREATED)
-    public User addProject(@PathVariable Long id, @RequestBody Project project) {
+    public Project addProject(@PathVariable Long id, @RequestBody Project project) {
 
         log.info("addProject");
 
@@ -72,9 +71,9 @@ public class UserController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(value = HttpStatus.CREATED)
-    public User addCategory(@PathVariable Long id, @RequestBody Category category) {
+    public Category addCategory(@PathVariable Long id, @RequestBody Category category) {
 
-        log.info("addProject");
+        log.info("addCategory");
 
         return userService.addCategory(id, category);
     }
