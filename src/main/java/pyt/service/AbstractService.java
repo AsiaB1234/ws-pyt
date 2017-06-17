@@ -11,35 +11,34 @@ public abstract class AbstractService<T, Repository extends AbstractRepository<T
     Logger log = LoggerFactory.getLogger(getClass());
 
     @Autowired
-    private AuthService authService;
+    protected AuthService authService;
 
     @Autowired
     protected Repository repository;
 
-    public T getById(Long id) {
+    public T getById(Long id, Long userId) {
 
         log.info("getById");
+
+        authService.verifyCurrentLoggedUser(userId);
 
         return repository.findOne(id, -1);
     }
 
-    public List<T> get() {
+    public List<T> get(Long userId) {
 
         log.info("get");
+
+        authService.verifyCurrentLoggedUser(userId);
 
         return (List) repository.findAll();
     }
 
-    public T save(T t) {
+    public T save(T t, Long userId) {
 
         log.info("save");
 
-        return repository.save(t, 0);
-    }
-
-    public T update(T t) {
-
-        log.info("update");
+        authService.verifyCurrentLoggedUser(userId);
 
         return repository.save(t, 0);
     }

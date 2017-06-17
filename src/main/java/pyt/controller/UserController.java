@@ -64,15 +64,6 @@ public class UserController {
         return userService.getById(id);
     }
 
-    @RequestMapping(method = RequestMethod.POST,
-            consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseStatus(value = HttpStatus.CREATED)
-    public User save(@RequestBody User user) {
-        log.info("save");
-        return userService.save(user);
-    }
-
     @RequestMapping(value = "/{id}/tasks", method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)

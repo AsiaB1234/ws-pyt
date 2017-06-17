@@ -14,9 +14,11 @@ public class TaskService extends
     @Autowired
     CategoryService categoryService;
 
-    public Comment addComment(Comment comment, Long id) {
+    public Comment addComment(Comment comment, Long id, Long userId) {
 
         log.info("addComment");
+
+        authService.verifyCurrentLoggedUser(id);
 
         Task task = repository.findOne(id);
         if (task == null) {
@@ -27,11 +29,13 @@ public class TaskService extends
         return comment;
     }
 
-    public Category setCategory(Long id, Long categoryId) {
+    public Category setCategory(Long id, Long categoryId, Long userId) {
 
         log.info("setCategory");
 
-        Category category = categoryService.getById(categoryId);
+        authService.verifyCurrentLoggedUser(id);
+
+        Category category = categoryService.getById(categoryId, userId);
         if (category == null) {
             throw new PytServiceException("Category with given id doesn't exist.");
         }

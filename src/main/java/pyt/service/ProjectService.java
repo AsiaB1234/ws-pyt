@@ -12,9 +12,11 @@ public class ProjectService extends AbstractService<Project, ProjectRepository> 
     @Autowired
     CategoryService categoryService;
 
-    public Task addTask(Task task, Long id) {
+    public Task addTask(Task task, Long id, Long userId) {
 
         log.info("addTask");
+
+        authService.verifyCurrentLoggedUser(id);
 
         Project project = repository.findOne(id);
         if (project == null) {

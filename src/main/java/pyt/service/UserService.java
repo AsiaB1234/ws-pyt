@@ -63,16 +63,11 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public User save(User user) {
-
-        log.info("save");
-
-        return userRepository.save(user, 1);
-    }
-
     public Task addTask(Long id, Task task) {
 
         log.info("addTask");
+
+        authService.verifyCurrentLoggedUser(id);
 
         User user = userRepository.findOne(id);
         if (user == null) {
@@ -87,6 +82,8 @@ public class UserService {
 
         log.info("addProject");
 
+        authService.verifyCurrentLoggedUser(id);
+
         User user = userRepository.findOne(id);
         if (user == null) {
             throw new PytServiceException("User with given id doesn't exist.");
@@ -99,6 +96,8 @@ public class UserService {
     public Category addCategory(Long id, Category category) {
 
         log.info("addCategory");
+
+        authService.verifyCurrentLoggedUser(id);
 
         User user = userRepository.findOne(id);
         if (user == null) {

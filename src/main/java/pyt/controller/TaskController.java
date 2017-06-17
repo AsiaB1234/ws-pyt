@@ -21,22 +21,22 @@ public class TaskController extends AbstractController<Task, TaskService> {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(value = HttpStatus.CREATED)
-    public Comment addComment(@PathVariable Long id, @RequestBody Comment comment) {
+    public Comment addComment(@PathVariable Long id, @RequestBody Comment comment, @RequestBody Long userId) {
 
         log.info("addComment");
 
-        return service.addComment(comment, id);
+        return service.addComment(comment, id, userId);
     }
 
     @RequestMapping(value = "/{id}/category/{categoryId}", method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(value = HttpStatus.CREATED)
-    public Category setCategory(@PathVariable Long id, @PathVariable Long categoryId) {
+    public Category setCategory(@PathVariable Long id, @PathVariable Long categoryId, @RequestBody Long userId) {
 
         log.info("setCategory");
 
-        return service.setCategory(id, categoryId);
+        return service.setCategory(id, categoryId, userId);
     }
 
 }
