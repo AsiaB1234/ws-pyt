@@ -1,5 +1,8 @@
 package pyt.service;
 
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +43,8 @@ public class UserService {
             throw new PytServiceException("User with given email doesn't exist.");
         }
 
-        if (user.getPassword() == null || !user.getPassword().equals(password)) {
+        String hashedPassword = hashPassword(password);
+        if (user.getPassword() == null || !user.getPassword().equals(hashedPassword)) {
             throw new UnauthorizedException();
         }
         return user;
@@ -50,16 +54,11 @@ public class UserService {
 
         log.info("signUp");
 
-        if (request.getEmail().isEmpty()
-                || request.getName().isEmpty()
-                || request.getPassword().isEmpty()) {
-            throw new PytServiceException("Invalid user values.");
-        }
         User user = userRepository.findUserByEmail(request.getEmail());
         if (user != null) {
             throw new PytServiceException("User with given email already exist.");
         }
-        user = new User(request.getName(), request.getPassword(), request.getEmail());
+        user = new User(request.getName(), hashPassword(request.getPassword()), request.getEmail());
         return userRepository.save(user);
     }
 
@@ -106,6 +105,23 @@ public class UserService {
         user.addCategory(category);
         userRepository.save(user, 1);
         return category;
+    }
+
+    public String hashPassword(String password) {
+        String generatedPassword = null;
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            md.update("someAdditionalString".getBytes());
+            byte[] bytes = md.digest(password.getBytes("UTF-8"));
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < bytes.length; i++) {
+                sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+            }
+            generatedPassword = sb.toString();
+        } catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return generatedPassword;
     }
 
 }

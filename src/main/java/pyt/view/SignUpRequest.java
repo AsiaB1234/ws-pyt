@@ -1,9 +1,18 @@
 package pyt.view;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class SignUpRequest {
 
+    @NotNull
+    @Size(min = 1)
     private String email;
+    @NotNull
+    @Size(min = 1)
     private String password;
+    @NotNull
+    @Size(min = 1)
     private String name;
 
     public String getEmail() {

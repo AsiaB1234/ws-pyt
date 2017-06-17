@@ -2,6 +2,7 @@ package pyt.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pyt.exception.PytServiceException;
 import pyt.model.Category;
 import pyt.model.Comment;
 import pyt.model.Task;

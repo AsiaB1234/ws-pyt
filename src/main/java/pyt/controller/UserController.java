@@ -20,6 +20,7 @@ import pyt.view.LoginRequest;
 import pyt.view.UserView;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import pyt.view.SignUpRequest;
 
 @RestController
@@ -46,7 +47,7 @@ public class UserController {
     @RequestMapping(value = "/signUp", method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public UserView signUp(@RequestBody SignUpRequest request, HttpSession session) {
+    public UserView signUp(@RequestBody @Valid SignUpRequest request, HttpSession session) {
         User user = userService.signUp(request);
         session.setAttribute("userId", user.getId());
         return new UserView(user);
