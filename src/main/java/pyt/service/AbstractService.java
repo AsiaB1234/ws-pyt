@@ -11,6 +11,9 @@ public abstract class AbstractService<T, Repository extends AbstractRepository<T
     Logger log = LoggerFactory.getLogger(getClass());
 
     @Autowired
+    private AuthService authService;
+
+    @Autowired
     protected Repository repository;
 
     public T getById(Long id) {

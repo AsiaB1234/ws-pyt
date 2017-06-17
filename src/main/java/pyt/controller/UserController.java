@@ -16,7 +16,11 @@ import pyt.model.Project;
 import pyt.model.Task;
 import pyt.model.User;
 import pyt.service.UserService;
+import pyt.view.LoginRequest;
 import pyt.view.UserView;
+
+import javax.servlet.http.HttpSession;
+import pyt.view.SignUpRequest;
 
 @RestController
 @RequestMapping("/user")
@@ -25,7 +29,33 @@ public class UserController {
     Logger log = LoggerFactory.getLogger(getClass());
 
     @Autowired
+    protected HttpSession session;
+
+    @Autowired
     protected UserService userService;
+
+    @RequestMapping(value = "/login", method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public UserView login(@RequestBody LoginRequest request, HttpSession session) {
+        User user = userService.login(request.getEmail(), request.getPassword());
+        session.setAttribute("userId", user.getId());
+        return new UserView(user);
+    }
+
+    @RequestMapping(value = "/signUp", method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public UserView signUp(@RequestBody SignUpRequest request, HttpSession session) {
+        User user = userService.signUp(request);
+        session.setAttribute("userId", user.getId());
+        return new UserView(user);
+    }
+
+    @RequestMapping(value = "/logout", method = RequestMethod.POST)
+    public void logout(HttpSession session) {
+        session.invalidate();
+    }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)

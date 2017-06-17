@@ -13,11 +13,6 @@ public class TaskService extends
 
     @Autowired
     CategoryService categoryService;
-//
-//    public List<Task> getTasksByUser(long id) {
-//        return null;
-////        return repository.getTasksByUser(id);
-//    }
 
     public Comment addComment(Comment comment, Long id) {
 
