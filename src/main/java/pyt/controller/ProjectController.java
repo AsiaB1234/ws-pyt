@@ -20,10 +20,10 @@ public class ProjectController extends AbstractController<Project, ProjectServic
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(value = HttpStatus.CREATED)
-    public Task addTask(@PathVariable Long id, @RequestBody Task task, @RequestBody Long userId) {
+    public Task addTask(@PathVariable Long id, @RequestBody Task task) {
 
         log.info("addTask");
 
-        return service.addTask(task, id, userId);
+        return service.addTask(task, id);
     }
 }

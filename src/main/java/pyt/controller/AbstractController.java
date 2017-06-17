@@ -20,26 +20,26 @@ public abstract class AbstractController<T, Service extends AbstractService> {
     @Autowired
     protected Service service;
 
-    @RequestMapping(value = "/{id}/{userId}", method = RequestMethod.GET,
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public T getById(@PathVariable Long id, @PathVariable Long userId) {
+    public T getById(@PathVariable Long id) {
         log.info("getById");
-        return (T) service.getById(id, userId);
+        return (T) service.getById(id);
     }
 
-    @RequestMapping(value = "/{userId}", method = RequestMethod.GET,
+    @RequestMapping(method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<T> get(@PathVariable Long userId) {
+    public List<T> get() {
         log.info("get");
-        return service.get(userId);
+        return service.get();
     }
 
     @RequestMapping(method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(value = HttpStatus.CREATED)
-    public T save(@RequestBody T t, @RequestBody Long userId) {
+    public T save(@RequestBody T t) {
         log.info("save");
-        return (T) service.save(t, userId);
+        return (T) service.save(t);
     }
 }

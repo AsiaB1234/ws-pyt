@@ -16,29 +16,29 @@ public abstract class AbstractService<T, Repository extends AbstractRepository<T
     @Autowired
     protected Repository repository;
 
-    public T getById(Long id, Long userId) {
+    public T getById(Long id) {
 
         log.info("getById");
 
-        authService.verifyCurrentLoggedUser(userId);
+        Long userId = authService.getCurrentLoggerUserId();
 
         return repository.findOne(id, -1);
     }
 
-    public List<T> get(Long userId) {
+    public List<T> get() {
 
         log.info("get");
 
-        authService.verifyCurrentLoggedUser(userId);
+        Long id = authService.getCurrentLoggerUserId();
 
         return (List) repository.findAll();
     }
 
-    public T save(T t, Long userId) {
+    public T save(T t) {
 
         log.info("save");
 
-        authService.verifyCurrentLoggedUser(userId);
+        Long id = authService.getCurrentLoggerUserId();
 
         return repository.save(t, 0);
     }
