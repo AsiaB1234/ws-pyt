@@ -28,12 +28,6 @@ public class UserService {
     @Autowired
     protected UserRepository userRepository;
 
-    public UserView getById(Long id) {
-        log.info("getById");
-        authService.verifyCurrentLoggedUser(id);
-        return new UserView(userRepository.findOne(id, 3));
-    }
-
     public User login(String email, String password) {
 
         log.info("login");
@@ -62,11 +56,21 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public Task addTask(Long id, Task task) {
+    public Long logged() {
+        return authService.getCurrentLoggerUserId();
+    }
+
+    public UserView getUser() {
+        log.info("getById");
+        Long id = authService.getCurrentLoggerUserId();
+        return new UserView(userRepository.findOne(id, 3));
+    }
+
+    public Task addTask(Task task) {
 
         log.info("addTask");
 
-        authService.verifyCurrentLoggedUser(id);
+        Long id = authService.getCurrentLoggerUserId();
 
         User user = userRepository.findOne(id);
         if (user == null) {
@@ -77,11 +81,11 @@ public class UserService {
         return task;
     }
 
-    public Project addProject(Long id, Project project) {
+    public Project addProject(Project project) {
 
         log.info("addProject");
 
-        authService.verifyCurrentLoggedUser(id);
+        Long id = authService.getCurrentLoggerUserId();
 
         User user = userRepository.findOne(id);
         if (user == null) {
@@ -92,11 +96,11 @@ public class UserService {
         return project;
     }
 
-    public Category addCategory(Long id, Category category) {
+    public Category addCategory(Category category) {
 
         log.info("addCategory");
 
-        authService.verifyCurrentLoggedUser(id);
+        Long id = authService.getCurrentLoggerUserId();
 
         User user = userRepository.findOne(id);
         if (user == null) {

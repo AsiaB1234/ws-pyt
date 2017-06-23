@@ -46,7 +46,7 @@ public class UserServiceTest {
 
     @Test
     public void testGetById() {
-        UserView userFromRepository = userService.getById(testUser.getId());
+        UserView userFromRepository = userService.getUser();
 
         assertEquals(testUser.getId(), userFromRepository.getId());
         assertEquals(testUser.getName(), userFromRepository.getName());
@@ -94,13 +94,13 @@ public class UserServiceTest {
 
     @Test(expected = PytServiceException.class)
     public void testAddTaskUserNotExist() {
-        userService.addTask(0l, null);
+        userService.addTask(null);
     }
 
     @Test
     public void testAddTask() {
         Task task = new Task(1234l, "Test task", null, null, null, null, null, null);
-        Task newTask = userService.addTask(testUser.getId(), task);
+        Task newTask = userService.addTask(task);
 
         assertEquals(task, newTask);
         assertTrue(testUser.getTasks().contains(task));
@@ -108,13 +108,13 @@ public class UserServiceTest {
 
     @Test(expected = PytServiceException.class)
     public void testAddProjectUserNotExist() {
-        userService.addProject(0l, null);
+        userService.addProject(null);
     }
 
     @Test
     public void testAddProject() {
         Project project = new Project(1234l, "Test task", null);
-        Project newProject = userService.addProject(testUser.getId(), project);
+        Project newProject = userService.addProject(project);
 
         assertEquals(project, newProject);
         assertTrue(testUser.getProjects().contains(project));
