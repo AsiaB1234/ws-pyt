@@ -46,6 +46,8 @@ public class UserServiceTest {
 
     @Test
     public void testGetById() {
+        doReturn(testUser.getId()).when(authServiceMock).getCurrentLoggerUserId();
+
         UserView userFromRepository = userService.getUser();
 
         assertEquals(testUser.getId(), userFromRepository.getId());
@@ -99,6 +101,8 @@ public class UserServiceTest {
 
     @Test
     public void testAddTask() {
+        doReturn(testUser.getId()).when(authServiceMock).getCurrentLoggerUserId();
+
         Task task = new Task(1234l, "Test task", null, null, null, null, null, null);
         Task newTask = userService.addTask(task);
 
@@ -113,6 +117,8 @@ public class UserServiceTest {
 
     @Test
     public void testAddProject() {
+        doReturn(testUser.getId()).when(authServiceMock).getCurrentLoggerUserId();
+
         Project project = new Project(1234l, "Test task", null);
         Project newProject = userService.addProject(project);
 
