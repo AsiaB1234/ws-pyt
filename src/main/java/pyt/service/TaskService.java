@@ -17,8 +17,6 @@ public class TaskService extends
 
     public Comment addComment(Comment comment, Long id) {
 
-        log.info("addComment");
-
         Long userId = authService.getCurrentLoggerUserId();
 
         Task task = repository.findOne(id);
@@ -31,8 +29,6 @@ public class TaskService extends
     }
 
     public Category setCategory(Long id, Long categoryId) {
-
-        log.info("setCategory");
 
         Long userId = authService.getCurrentLoggerUserId();
 

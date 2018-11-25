@@ -1,20 +1,20 @@
-package pyt.view;
+package pyt.controller.model;
 
 import java.io.Serializable;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 import pyt.model.Category;
 import pyt.model.Project;
 import pyt.model.Task;
 import pyt.model.User;
 
-public class UserView implements Serializable {
+public class UserDto implements Serializable {
 
     private Long id;
     private String name;
-    private List<Task> tasks = new LinkedList<>();
-    private List<Project> projects = new LinkedList<>();
-    private List<Category> categories = new LinkedList<>();
+    private List<Task> tasks = new ArrayList<>();
+    private List<Project> projects = new ArrayList<>();
+    private List<Category> categories = new ArrayList<>();
 
     public UserView() {
     }

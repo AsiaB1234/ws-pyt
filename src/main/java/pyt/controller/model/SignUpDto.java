@@ -1,9 +1,9 @@
-package pyt.view;
+package pyt.controller.model;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-public class SignUpRequest {
+public class SignUpDto {
 
     @NotNull
     @Size(min = 1)

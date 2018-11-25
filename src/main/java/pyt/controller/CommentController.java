@@ -6,7 +6,7 @@ import pyt.model.Comment;
 import pyt.service.CommentService;
 
 @RestController
-@RequestMapping("/comment")
+@RequestMapping("/comments")
 public class CommentController extends AbstractController<Comment, CommentService> {
 
 }

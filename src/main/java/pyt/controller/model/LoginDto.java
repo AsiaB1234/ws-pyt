@@ -1,6 +1,6 @@
-package pyt.view;
+package pyt.controller.model;
 
-public class LoginRequest {
+public class LoginDto {
     private String email;
     private String password;
 

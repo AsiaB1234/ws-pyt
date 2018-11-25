@@ -6,7 +6,7 @@ import pyt.model.Category;
 import pyt.service.CategoryService;
 
 @RestController
-@RequestMapping("/category")
+@RequestMapping("/categories")
 public class CategoryController extends AbstractController<Category, CategoryService> {
 
 }

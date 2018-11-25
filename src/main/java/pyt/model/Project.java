@@ -1,7 +1,7 @@
 package pyt.model;
 
 import java.io.Serializable;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 import org.neo4j.ogm.annotation.GraphId;
 import org.neo4j.ogm.annotation.NodeEntity;
@@ -14,7 +14,7 @@ public class Project implements Serializable {
     private Long id;
     private String name;
     @Relationship(type = "PROJECT_TASK")
-    private List<Task> tasks = new LinkedList<>();
+    private List<Task> tasks = new ArrayList<>();
 
     public Project() {
     }

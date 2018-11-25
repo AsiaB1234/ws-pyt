@@ -20,8 +20,6 @@ import pyt.view.UserView;
 @Service
 public class UserService {
 
-    Logger log = LoggerFactory.getLogger(getClass());
-
     @Autowired
     private AuthService authService;
 
@@ -29,8 +27,6 @@ public class UserService {
     protected UserRepository userRepository;
 
     public User login(String email, String password) {
-
-        log.info("login");
 
         User user = userRepository.findUserByEmail(email);
         if (user == null) {
@@ -46,8 +42,6 @@ public class UserService {
 
     public User signUp(SignUpRequest request) {
 
-        log.info("signUp");
-
         User user = userRepository.findUserByEmail(request.getEmail());
         if (user != null) {
             throw new PytServiceException("User with given email already exist.");
@@ -56,19 +50,12 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public Long logged() {
-        return authService.getCurrentLoggerUserId();
-    }
-
     public UserView getUser() {
-        log.info("getById");
         Long id = authService.getCurrentLoggerUserId();
         return new UserView(userRepository.findOne(id, 3));
     }
 
     public Task addTask(Task task) {
-
-        log.info("addTask");
 
         Long id = authService.getCurrentLoggerUserId();
 
@@ -83,8 +70,6 @@ public class UserService {
 
     public Project addProject(Project project) {
 
-        log.info("addProject");
-
         Long id = authService.getCurrentLoggerUserId();
 
         User user = userRepository.findOne(id);
@@ -97,8 +82,6 @@ public class UserService {
     }
 
     public Category addCategory(Category category) {
-
-        log.info("addCategory");
 
         Long id = authService.getCurrentLoggerUserId();
 

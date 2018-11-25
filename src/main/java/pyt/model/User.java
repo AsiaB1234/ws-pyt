@@ -1,7 +1,7 @@
 package pyt.model;
 
 import java.io.Serializable;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 import org.neo4j.ogm.annotation.GraphId;
 import org.neo4j.ogm.annotation.NodeEntity;
@@ -16,11 +16,11 @@ public class User implements Serializable {
     private String password;
     private String email;
     @Relationship(type = "USER_TASK")
-    private List<Task> tasks = new LinkedList<>();
+    private List<Task> tasks = new ArrayList<>();
     @Relationship(type = "USER_PROJECT")
-    private List<Project> projects = new LinkedList<>();
+    private List<Project> projects = new ArrayList<>();
     @Relationship(type = "USER_CATEGORY")
-    private List<Category> categories = new LinkedList<>();
+    private List<Category> categories = new ArrayList<>();
 
     public User() {
     }

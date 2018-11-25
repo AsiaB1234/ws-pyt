@@ -2,7 +2,7 @@ package pyt.model;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 import org.neo4j.ogm.annotation.GraphId;
 import org.neo4j.ogm.annotation.NodeEntity;
@@ -21,7 +21,7 @@ public class Task implements Serializable {
     private Boolean isImportant;
     private Boolean isDone;
     @Relationship(type = "TASK_COMMENT")
-    private List<Comment> comments = new LinkedList<>();
+    private List<Comment> comments = new ArrayList<>();
     @Relationship(type = "TASK_CATEGORY")
     private Category category;
 

@@ -14,9 +14,7 @@ public class ProjectService extends AbstractService<Project, ProjectRepository> 
     CategoryService categoryService;
 
     public Task addTask(Task task, Long id) {
-
-        log.info("addTask");
-
+      
         Long userId = authService.getCurrentLoggerUserId();
 
         Project project = repository.findOne(id);

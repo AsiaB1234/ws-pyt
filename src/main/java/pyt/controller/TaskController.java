@@ -5,37 +5,32 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import pyt.model.Category;
 import pyt.model.Comment;
 import pyt.model.Task;
 import pyt.service.TaskService;
+import pyt.view.ValueView;
 
 @RestController
-@RequestMapping("/task")
+@RequestMapping("/tasks")
 public class TaskController extends AbstractController<Task, TaskService> {
 
-    @RequestMapping(value = "/{id}/comments", method = RequestMethod.POST,
+    @PostMapping(value = "/{id}/comments",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(value = HttpStatus.CREATED)
     public Comment addComment(@PathVariable Long id, @RequestBody Comment comment) {
-
-        log.info("addComment");
-
         return service.addComment(comment, id);
     }
 
-    @RequestMapping(value = "/{id}/category/{categoryId}", method = RequestMethod.POST,
+    @PutMapping(value = "/{id}/category",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseStatus(value = HttpStatus.CREATED)
-    public Category setCategory(@PathVariable Long id, @PathVariable Long categoryId) {
-
-        log.info("setCategory");
-
+    public Category setCategory(@PathVariable Long id, @RequestBody Long categoryId) {
         return service.setCategory(id, categoryId);
     }
 
